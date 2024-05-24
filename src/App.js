@@ -10,6 +10,8 @@ uuidv4();
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [isActive, setActive] = useState("first");
+
   const addTodo = todo => {
     setTodos([...todos, {id: uuidv4(), task: todo, completed: false, isEdited: false}])
   }
@@ -28,6 +30,13 @@ function App() {
   const deleteTodo = (id) => {
     setTodos(Object.values(todos).filter((todo) => {
       return (todo.id !== id) 
+    }
+    ))
+  }
+
+  const clearCompleted = () => {
+    setTodos(Object.values(todos).filter((todo) => {
+      return (!todo.completed) 
     }
     ))
   }
@@ -53,16 +62,17 @@ function App() {
   }
 
 
+
   return (
-    <Context.Provider value = {{completeTodo, deleteTodo, editTodo, updateTask}}>
+    <Context.Provider value = {{completeTodo, deleteTodo, editTodo, updateTask, clearCompleted}}>
     <section className="todoapp">
           <div className ="header">
             <h1>todos</h1>
             <NewTaskForm addTodo={addTodo}/>
           </div>
           <section className="main">
-          <TaskList todos={todos}/>
-          <Footer todos={todos}/>
+          <TaskList todos={todos} isActive={isActive}/>
+          <Footer todos={todos} isActive={isActive} setActive={setActive}/>
           </section>
     </section>
     </Context.Provider>

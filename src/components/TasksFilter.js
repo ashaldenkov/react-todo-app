@@ -1,14 +1,27 @@
-export default function TasksFilter() {
+
+export default function TasksFilter({isActive, setActive}) {
+    const handleFirst = () => {
+        setActive("first");
+      };
+      const handleSecond = () => {
+        setActive("second");
+      };
+      const handleThird = () => {
+        setActive("third");
+      };
+    
+      
+
     return (
     <ul className="filters">
     <li>
-    <button className="selected">All</button>
+    <button className={isActive === 'first' ? 'selected' : null} onClick={ () => handleFirst()}>All</button>
     </li>
     <li>
-    <button>Active</button>
+    <button className={isActive === 'second' ? 'selected' : null} onClick={ () => handleSecond()}>Active</button>
     </li>
     <li>
-    <button>Completed</button>
+    <button className={isActive === 'third' ? 'selected' : null} onClick={ () => handleThird()}>Completed</button>
     </li>
     </ul>
     )
