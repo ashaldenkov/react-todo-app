@@ -1,8 +1,12 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import {Context} from './context'
 import {EditTask} from './EditTask.js';
+import { formatDistanceToNow } from "https://unpkg.com/date-fns/formatDistanceToNow.mjs";
+import PropTypes from 'prop-types';
 
-export function Task({isActive, ...task}) {
+function Task({isActive, ...task}) {
+  const [createTime, setCreateTime] = useState()
+
   const {completeTodo, deleteTodo, editTodo} = useContext(Context)
   const classStatus = () => {
     if (task.completed) {
@@ -41,7 +45,24 @@ export function Task({isActive, ...task}) {
       return hid
     }
   }
-  
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCreateTime(formatDistanceToNow(
+        task.date,
+        {includeSeconds: true}
+      ));
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [task.date]);
+
+  const inputRef = useRef()
+
+  useEffect(() => {
+    if (task.isEdited) {
+      inputRef.current.focus();
+    }
+  }, [task.isEdited]);
 
     return (
       <li className={classComb(classStatus(), filterStatus(isActive))}>
@@ -49,13 +70,27 @@ export function Task({isActive, ...task}) {
           <input className="toggle" type="checkbox" onChange={() => completeTodo(task.id)}/>
           <label>
             <span className="description">{task.task}</span>
-            <span className="created">created 17 seconds ago</span>
+            <span className="created">Created {createTime || `0 seconds`} ago</span>
           </label>
           <button className="icon icon-edit" onClick={() => editTodo(task.id)}/>
           <button className="icon icon-destroy" onClick={() => deleteTodo(task.id)} />
         </div>
-        <EditTask task={task}/>
-
+        <EditTask refs={inputRef} task={task}/>
       </li>
     )
 }
+
+Task.defaultProps  = {
+  isActive: "first",
+  completed: false,
+  isEdited: false
+}
+
+Task.propTypes = {
+  isActive: PropTypes.string,
+  completed: PropTypes.bool,
+  isEdited: PropTypes.bool,
+  task: PropTypes.string
+}
+
+export {Task}

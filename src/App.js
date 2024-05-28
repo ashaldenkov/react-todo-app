@@ -5,6 +5,7 @@ import {NewTaskForm} from './components/NewTaskForm.js';
 import {useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from './components/context.js';
+
 uuidv4();
 
 
@@ -13,7 +14,7 @@ function App() {
   const [isActive, setActive] = useState("first");
 
   const addTodo = todo => {
-    setTodos([...todos, {id: uuidv4(), task: todo, completed: false, isEdited: false}])
+    setTodos([...todos, {id: uuidv4(), task: todo, completed: false, isEdited: false, date: Date.now()}])
   }
 
 
@@ -78,5 +79,8 @@ function App() {
     </Context.Provider>
   );
 }
+
+
+
 
 export default App;
