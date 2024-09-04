@@ -36,6 +36,8 @@
     And a component that is displayed during conditional rendering - EditTask to change the name of the task.
     그리고 조건부 렌더링 시 표시되는 컴포넌트는 태스크 이름을 변경하는 EditTask 입니다.
 
+    Styling was made not in best manner - better to make it with CSS modules or TailwindCSS but for short test task it makes it's work great
+    스타일링이 최상의 방식으로 이루어지지 않았습니다. CSS module나 Tailwind CSS로 만드는 것이 더 좋지만 짧은 테스트 작업에서는 잘 작동합니다.
     
     
  
