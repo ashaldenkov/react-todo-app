@@ -16,6 +16,7 @@
 
     The project is already deployed on Vercel.
     해당 프로젝트는 이미 Vercel에 게시되었습니다.
+    https://react-todo-app-one-tawny.vercel.app/
     But you can download the repository and run it locally using the start script.
     그러나 저장소를 다운로드하고 시작 스크립트를 사용하여 로컬로 실행할 수 있습니다.
 
