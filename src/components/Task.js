@@ -1,21 +1,26 @@
 import { useContext, useEffect, useState, useRef } from "react";
-import {Context} from './context'
-import {EditTask} from './EditTask.js';
+import { Context } from '../context/todoContext.js'
+import { EditTask } from './EditTask.js';
 import { formatDistanceToNow } from "https://unpkg.com/date-fns/formatDistanceToNow.mjs";
 import PropTypes from 'prop-types';
+import {
+  EditOutlined,
+  CloseSquareFilled,
+} from '@ant-design/icons';
 
 function Task({isActive, ...task}) {
   const [createTime, setCreateTime] = useState()
 
   const {completeTodo, deleteTodo, editTodo} = useContext(Context)
+
   const classStatus = () => {
     if (task.completed) {
       return 'completed';
-  } if (task.isEdited) {
+    } if (task.isEdited) {
       return 'editing';
-  } if (task.deleted) {
+    } if (task.deleted) {
     return 'hidden';
-}
+    }
   return null;
   }
 
@@ -72,8 +77,12 @@ function Task({isActive, ...task}) {
             <span className="description">{task.task}</span>
             <span className="created">Created {createTime || `0 seconds`} ago</span>
           </label>
-          <button className="icon icon-edit" onClick={() => editTodo(task.id)}/>
-          <button className="icon icon-destroy" onClick={() => deleteTodo(task.id)} />
+          <button className="icon icon-edit" onClick={() => editTodo(task.id)}>
+            <EditOutlined/>
+          </button>
+          <button className="icon icon-destroy" onClick={() => deleteTodo(task.id)}>
+            <CloseSquareFilled/>
+          </button>
         </div>
         <EditTask refs={inputRef} task={task}/>
       </li>

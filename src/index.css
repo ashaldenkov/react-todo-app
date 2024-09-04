@@ -258,17 +258,9 @@ body {
   right: 10px;
 }
 
-.todo-list li .icon-destroy:after {
-  content: '×';
-}
-
 .todo-list li .icon-edit {
   font-size: 19px;
   right: 45px;
-}
-
-.todo-list li .icon-edit:after {
-  content: '✎';
 }
 
 .todo-list li .edit {

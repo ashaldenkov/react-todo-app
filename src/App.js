@@ -4,7 +4,7 @@ import {TaskList} from './components/TaskList.js';
 import {NewTaskForm} from './components/NewTaskForm.js';
 import {useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import { Context } from './components/context.js';
+import { Context } from './context/todoContext.js';
 
 uuidv4();
 
@@ -61,8 +61,6 @@ function App() {
     }}
     ))
   }
-
-
 
   return (
     <Context.Provider value = {{completeTodo, deleteTodo, editTodo, updateTask, clearCompleted}}>
